@@ -1,4 +1,14 @@
 import React, { useEffect, useState } from 'react';
+//import { fetchProfile } from '../../backend/get_user_profile/script';
+
+// imports are not allowed
+async function fetchProfile(code) {
+  const result = await fetch("https://api.spotify.com/v1/me", {
+      method: "GET", headers: { Authorization: `Bearer ${code}` }
+  });
+
+  return await result.json();
+}
 
 function App() {
     const [profile, setProfile] = useState({
@@ -10,9 +20,10 @@ function App() {
       images: [{ url: '' }]
     });
   
+    const code = 'Enter Access Token Here';
     useEffect(() => {
       // TODO: Create fetchProfile Data from backend
-      fetchProfileData()
+      fetchProfile(code)
         .then(data => setProfile(data))
         .catch(error => console.error('Error fetching profile data:', error));
     }, []);

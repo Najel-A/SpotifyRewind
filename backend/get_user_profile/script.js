@@ -15,7 +15,7 @@ if (!code) {
         .catch(error => console.error(error));
 }
 
-async function fetchProfile(code) {
+export async function fetchProfile(code) {
     const result = await fetch("https://api.spotify.com/v1/me", {
         method: "GET", headers: { Authorization: `Bearer ${code}` }
     });
@@ -23,7 +23,7 @@ async function fetchProfile(code) {
     return await result.json();
 }
 
-function populateUI(profile) {
+export function populateUI(profile) {
     document.getElementById("displayName").innerText = profile.display_name;
     document.getElementById("avatar").setAttribute("src", profile.images[0].url);
     document.getElementById("id").innerText = profile.id;
